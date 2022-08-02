@@ -50,6 +50,12 @@ public class Provider {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Provider [name=" + name + ", adress=" + adress + ", email=" + email + "]";
+	}
 	
 	
 	
