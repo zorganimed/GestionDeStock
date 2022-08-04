@@ -14,12 +14,17 @@
 </head>
 <body>
 	<div class="container my-5">
-		<h1 align="center">Ajouter un provider</h1>
+		<h3>Update Provider</h3>
 		<div class="card">
 			<div class="card-body">
-				<div class="col-md-10">
-					<form method="post" th:action="@{/provider/add}"
+				<div class="col-md-8">
+
+					<form method="post" th:action="@{/provider/update}"
 						th:object="${provider}">
+
+
+
+						<input type="hidden" th:field=*{id} />
 						<div class="row">
 							<div class="form-group col-md-8">
 								<label for="ProviderName" class="col-form-label">Name</label>
@@ -43,12 +48,12 @@
 								<!-- input type="email" name="pemail" class="form-control" id="ProviderEmail"   placeholder="Email"-->
 								<input type="text" th:field="*{email}" class="form-control"
 									id="ProviderEmail" placeholder="Provider Email" /> <span
-									th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+									th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}"
 									class="text-danger"></span>
 							</div>
-							<div class="col-md-6">
+							<div class="form-group col-md-8">
 								<input type="submit" class="btn btn-primary"
-									value="Add Provider" />
+									value="Update Provider" />
 							</div>
 						</div>
 					</form>
