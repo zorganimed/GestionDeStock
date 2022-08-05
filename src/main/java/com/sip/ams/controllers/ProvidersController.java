@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sip.ams.entities.Article;
 import com.sip.ams.entities.Provider;
 import com.sip.ams.repositories.ProviderRepository;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +31,7 @@ public class ProvidersController {
 
 	}
 
-	@GetMapping("list")
+	@GetMapping("/list")
 	public String listProviders(Model model) {
 		List<Provider> ls = (List<Provider>) providerRepository.findAll();
 		if (ls.isEmpty())
@@ -37,7 +40,7 @@ public class ProvidersController {
 		return "provider/listProviders";
 	}
 
-	@GetMapping("add")
+	@GetMapping("/add")
 	// @ResponseBody
 	public String showAddProviderForm(Model model) {
 		Provider provider = new Provider();
@@ -46,7 +49,7 @@ public class ProvidersController {
 	}
 
 	@PostMapping("/add")
-	public String addProvider(Provider provider, BindingResult bindingResult) {
+	public String addProvider(@Valid Provider provider, BindingResult bindingResult) {
 		System.out.println("binding result ");
 		System.out.println("binding has errors " + bindingResult.hasErrors());
 		if (bindingResult.hasErrors()) {
@@ -57,7 +60,7 @@ public class ProvidersController {
 
 	}
 
-	@GetMapping("edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String showUpdateProviderForm(@PathVariable("id") Long id, Model model) {
 		Provider provider = providerRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid provider id" + id));
@@ -65,22 +68,32 @@ public class ProvidersController {
 		return "provider/updateProvider";
 	}
 
-	@PostMapping("update")
-	public String updateProvider(Provider provider, BindingResult bindingResult) {
+	@PostMapping("/update")
+	public String updateProvider(@Valid Provider provider, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return "provide/addProvider";
+			return "provider/updateProvider";
 		}
 		providerRepository.save(provider);
 		return "redirect:list";
 
 	}
 
-	@GetMapping("delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteProvider(@PathVariable("id") Long id, Model model) {
 		Provider provider = providerRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid provider id" + id));
 		providerRepository.delete(provider);
 		return "redirect:../list";
+	}
+
+	@GetMapping("/show/{id}")
+	public String showArticles(@PathVariable("id") Long id, Model model) {
+		Provider provider = providerRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid provider id " + id));
+		List<Article> listArticles = (List<Article>) providerRepository.findArticlesByProvider(id);
+		model.addAttribute("articles", listArticles);
+		model.addAttribute("provider", provider);
+		return "provider/showArticles";
 	}
 
 }

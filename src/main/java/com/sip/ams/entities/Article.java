@@ -20,9 +20,11 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "label")
-	@NotBlank(message = "Label est mandatory")
+	@NotBlank(message = "Label is mandatory")
 	private String label;
 	private float price;
+	@Column(name = "picture")
+	private String picture;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "provider_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -33,10 +35,11 @@ public class Article {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Article(@NotBlank(message = "Label est mandatory") String label, float price) {
+	public Article(@NotBlank(message = "Label est mandatory") String label, float price, String picture) {
 		super();
 		this.label = label;
 		this.price = price;
+		this.picture = picture;
 	}
 
 	public Long getId() {
@@ -69,6 +72,14 @@ public class Article {
 
 	public void setProvider(Provider provider) {
 		this.provider = provider;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }
