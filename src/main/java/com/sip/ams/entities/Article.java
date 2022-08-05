@@ -25,6 +25,12 @@ public class Article {
 	private float price;
 	@Column(name = "picture")
 	private String picture;
+	@Column(name = "photoFace")
+	private String photoFace;
+	
+
+	@Column(name = "photoProfil")
+	private String photoProfil;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "provider_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -35,11 +41,30 @@ public class Article {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Article(@NotBlank(message = "Label est mandatory") String label, float price, String picture) {
+	public Article(@NotBlank(message = "Label est mandatory") String label, float price, String picture,String photoFace, String photoProfil) {
 		super();
 		this.label = label;
 		this.price = price;
 		this.picture = picture;
+		this.photoFace = photoFace;
+		this.photoProfil = photoProfil;
+		
+	}
+	
+	public String getPhotoFace() {
+		return photoFace;
+	}
+
+	public void setPhotoFace(String photoFace) {
+		this.photoFace = photoFace;
+	}
+
+	public String getPhotoProfil() {
+		return photoProfil;
+	}
+
+	public void setPhotoProfil(String photoProfil) {
+		this.photoProfil = photoProfil;
 	}
 
 	public Long getId() {
