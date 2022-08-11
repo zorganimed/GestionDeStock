@@ -68,7 +68,7 @@ public class AccountController {
 	        msg.setSubject("Account Has Been Activated");
 	        msg.setText("Hello, Your account has been activated. "
 	        		+ 
-	        		"You can log in : http://127.0.0.1:81/login"
+	        		"You can log in : http://127.0.0.1:8080/login"
 	        		+ " \n Best Regards!");
 	        }
 	        else
@@ -86,7 +86,7 @@ public class AccountController {
     public String enableUserAcount(@PathVariable ("id") int id, 
     		@PathVariable ("email") String email) {
     	
-		// sendEmail(email, true);
+		 sendEmail(email, true);
 		 User user = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
 	     user.setActive(1);
 	     userRepository.save(user);
@@ -98,7 +98,7 @@ public class AccountController {
 	public String disableUserAcount(@PathVariable ("id") int id, 
     		@PathVariable ("email") String email) {
     	
-		// sendEmail(email, false);
+		 sendEmail(email, false);
 		 
 		 User user = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
 	     user.setActive(0);

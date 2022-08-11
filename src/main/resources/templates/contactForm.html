@@ -1,0 +1,57 @@
+<!DOCTYPEHTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>AMS-Dashboard</title>
+
+</head>
+<body>
+<div th:replace="fragments/header::header"/>
+
+<div class="container">
+
+<form th:action="@{/contact}"
+					 method="post" class="form-horizontal"
+					 role="form">
+					<h2>Registration Form</h2>
+					<div class="form-group">
+						<div class="col-sm-9">
+						<label for="fullName"
+								class="col-sm-4 col-form-label">Full Name:</label>
+						<input type="text" name="fullname" placeholder="fullName"
+								class="form-control"/>
+						</div>
+						
+						<div class="col-sm-9">
+						<label for="email"
+								class="col-sm-4 col-form-label">Email</label>
+						<input type="email" name="email" placeholder="email"
+								class="form-control"/>
+						</div>
+						
+						
+						<div class="col-sm-9">
+						<label for="subject"
+								class="col-sm-4 col-form-label">Subject:</label>
+						<input type="text" name="subject" placeholder="subject"
+								class="form-control"/>
+						</div>
+						<div class="col-sm-9">
+						<label for="content" name="content"
+								class="col-sm-4 col-form-label">Content:</label>
+						<textarea rows="5" placeholder="content" name="content"
+								class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit"class="btnbtn-primary btn-block">Register User</button>
+						</div>
+					</div>
+					</form>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer::footer"/>
+
+</body>
+</html>
