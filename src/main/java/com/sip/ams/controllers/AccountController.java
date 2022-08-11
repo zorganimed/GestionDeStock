@@ -68,7 +68,7 @@ public class AccountController {
 	        msg.setSubject("Account Has Been Activated");
 	        msg.setText("Hello, Your account has been activated. "
 	        		+ 
-	        		"You can log in : http://127.0.0.1:8080/login"
+	        		"You can log in : https://zorganimedgestionstock.herokuapp.com/"//http://127.0.0.1:8080/login
 	        		+ " \n Best Regards!");
 	        }
 	        else
