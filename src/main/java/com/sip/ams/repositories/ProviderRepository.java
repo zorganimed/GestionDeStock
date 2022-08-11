@@ -12,7 +12,13 @@ import com.sip.ams.entities.Provider;
 
 @Repository
 public interface ProviderRepository extends CrudRepository<Provider, Long> {
+	
+	public Provider findProviderByAdress(String adr);
 
 	@Query("select a from Article a where a.provider.id=:x ")
 	List<Article>findArticlesByProvider(@Param("x") Long id);
+	
+	@Query("select p from Provider p where p.adress like %?1")
+	List<Provider> findProvidersByAdress(String adr);
+	
 }

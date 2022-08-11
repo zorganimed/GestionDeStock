@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sip.ams.entities.Article;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("/provider")
 public class ProvidersController {
+	
 	private final ProviderRepository providerRepository;
 
 	@Autowired
@@ -32,10 +34,24 @@ public class ProvidersController {
 	}
 
 	@GetMapping("/list")
-	public String listProviders(Model model) {
+	public String listProviders(Model model)
+			{
 		List<Provider> ls = (List<Provider>) providerRepository.findAll();
+		
 		if (ls.isEmpty())
 			ls = null;
+		model.addAttribute("providers", ls);
+		
+		return "provider/listProviders";
+	}
+	
+	@PostMapping("/searchAdress")
+	public String findProviderByAdress (Model model, @RequestParam(name = "adress", required = false) String adress) {
+		//List<Provider> ls = (List<Provider>) providerRepository.findAll();
+		List<Provider> ls = (List<Provider>) providerRepository.findProvidersByAdress(adress);
+		if (ls.isEmpty())
+			ls = null;
+		model.addAttribute("adress", adress);
 		model.addAttribute("providers", ls);
 		return "provider/listProviders";
 	}
@@ -95,5 +111,14 @@ public class ProvidersController {
 		model.addAttribute("provider", provider);
 		return "provider/showArticles";
 	}
+	/*
+	
+	@GetMapping("/list")
+	public String listProviders(Model model)
+			{
+		 
+		
+		return "provider/listProviders";
+	}*/
 
 }

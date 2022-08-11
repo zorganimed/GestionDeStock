@@ -22,10 +22,20 @@
 <title>Gestion de stock</title>
 </head>
 <body>
-	<h3 align="center">Tableau des fournisseurs</h3>
+	<h3 align="center">Tableau des Providers</h3>
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
+			<form th:action="@{/provider/searchAdress}" method="post">
+			
+								<label class="col-form-label">Taper une adresse </label>
+								<!-- input type="text" name="padress" class="form-control" id="ProvideAdress"  placeholder="Adresse"-->
+								<input type="text" name="adress" th:value="${adress}" />
+									<button class="btn btn-primary" type="submit"><i
+							class="fa fa-search">Chercher Povider</i></button> 
+							
+							</form>
+			
 				<div th:switch="${providers}" class="container my-5">
 					<p class="my-5">
 						<a class="btn btn-primary" th:href="@{/provider/add}"><i
@@ -58,6 +68,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
